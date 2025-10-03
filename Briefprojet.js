@@ -19,8 +19,7 @@ function menuPrincipal() {
     console.log("8. Rechercher un livre ");
     console.log("9. Afficher les abonnés");
     console.log("10. Enregistrer un emprunt");
-    console.log("11. Enregistrer un retour");
-    console.log("12. Quitter");}
+    console.log("11. Quitter");}
 function Introduirelivre() {
     let isbn = prompt("ISBN : ");
     let titre = prompt("Titre : ");
@@ -29,7 +28,7 @@ function Introduirelivre() {
     livres.push({  isbn, titre, auteur, annee, disponible: true } );
     console.log("Livre ajouté");}
 function ajouterPlusieursLivres() {
-    let n = parseInt(prompt("Combien de livres voulez-vous ajouter ? "));
+    let n =+prompt("Combien de livres voulez-vous ajouter ? ");
     for (let i = 0; i < n; i++) {
         console.log("Livre " + (i + 1));
         Introduirelivre();
@@ -78,7 +77,7 @@ function afficherAbonnes(){
     }
     else{console.log(abonnes)}}
 function rechercherLivreParISBN() {
-    let isbn = prompt("Entrez l'ISBN du livre: ");
+    let isbn = +prompt("Entrez l'ISBN du livre: ");
     let livre = livres.find(l => l.isbn === isbn);
     if (livre) {
         afficherLivres([livre]);
@@ -87,7 +86,7 @@ function rechercherLivreParISBN() {
     }
 }
 function enregistrerEmprunt() {
-    let abonneId = parseInt(prompt("ID de l'abonné : "));
+    let abonneId =+prompt("ID de l'abonné : ");
     let abonne = abonnes.find(a => a.id === abonneId);
  if (!abonne) {
         console.log("Abonné non trouvé.");
@@ -106,16 +105,6 @@ if (!livre.disponible) {
     emprunts.push({ abonneId, isbn });
 console.log("Emprunt enregistré ! " +livre.titre +" est maintenant emprunté par " +abonne.prenom + " " + abonne.nom )
     ;}
-function enregistrerRetour() {
-    let isbn = prompt("ISBN du livre à retourner : ");
-    let livre = livres.find(l => l.isbn === isbn);
-if (!livre) {
-        console.log("Livre inexistant.");
-    return;}
-    if (livre.disponible) {
-        console.log("Ce livre est déjà disponible.");}
-    emprunts = emprunts.filter(e => e.isbn !== isbn);
-console.log("Retour enregistré ! " + livre.titre + " est maintenant disponible.");}
 
 let choix;
 do {
@@ -132,8 +121,7 @@ do {
         case "8":rechercherLivreParISBN(); break;
         case "9": afficherAbonnes(); break;
         case "10": enregistrerEmprunt(); break;
-        case "11": enregistrerRetour(); break;
-        case "12": console.log("Au revoir !"); break;
+        case "11": console.log("Au revoir !"); break;
         default: console.log("Choix invalide !"); break;
     }
-} while(choix !== "12")
+} while(choix !== "11")
